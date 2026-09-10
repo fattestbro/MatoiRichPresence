@@ -1,23 +1,60 @@
 # MatoiRichPresence
 
-Desktop Discord Rich Presence client for Windows with context-aware activity detection, browser integration, customizable rules, privacy controls and a red/black anime-inspired interface.
+A Windows Discord Rich Presence client built around context rather than a pile of hard-coded statuses.
 
-## Status
+## Current release
 
-v5.0.0 — release candidate
+**5.0.0** — release candidate
 
-## Features
+### Included
 
-- Windows application and game detection
+- Foreground Windows application detection
 - Context-aware Activity Engine
-- YouTube/browser metadata bridge
-- Discord Rich Presence with configurable buttons
-- Public / Limited / Private modes
-- Application exclusions and custom rules
-- Local activity history
-- System tray controls
-- Single-instance guard
-- PySide6 interface with custom background support
-- Windows build workflow
+- Browser context bridge for Chromium/Firefox-based browsers
+- YouTube, GitHub, Twitch and Reddit URL awareness
+- Discord Rich Presence integration
+- Dynamic `Watch Video` button for detected YouTube URLs
+- PySide6 desktop UI
+- Private mode
+- Windows executable build script
+- Windows GitHub Actions test matrix
 
-See `CONTRIBUTING.md`, `SECURITY.md` and the project files for development details.
+## Requirements
+
+- Windows 10/11
+- Python 3.10+ for source execution
+- Discord desktop client for Rich Presence
+- A Discord Application ID
+
+## Run from source
+
+```powershell
+py -3.10 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -m matoi_rich_presence
+```
+
+Or run `build_exe.bat` on Windows to create `dist\MatoiRichPresence.exe`.
+
+## Browser bridge
+
+Load `browser_extension/` as an unpacked extension in Chromium/Firefox-compatible development tooling. The extension sends only the active tab URL and title to the localhost bridge used by the desktop client.
+
+## Privacy
+
+The project is designed around public activity context. It does not require a Discord account token and does not intentionally collect passwords, clipboard contents, keystrokes or screenshots. Use Private mode when you do not want an activity published.
+
+## Development
+
+Run:
+
+```powershell
+pytest -q
+```
+
+See `CONTRIBUTING.md` and `SECURITY.md` before opening a pull request or reporting a security issue.
+
+## License
+
+MIT
