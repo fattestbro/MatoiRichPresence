@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "MatoiRichPresence"
+version = "5.0.0"
+description = "Context-aware Discord Rich Presence client for Windows"
+requires-python = ">=3.10,<3.15"
+dependencies = ["PySide6>=6.11,<7", "pypresence>=4.4,<5", "psutil>=6,<7", "requests>=2.32,<3"]
+
+[project.scripts]
+matoi-rich-presence = "matoi_rich_presence.app:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
