@@ -1,0 +1,12 @@
+{
+  "client_id": "PUT_YOUR_DISCORD_APPLICATION_ID_HERE",
+  "enabled": true,
+  "privacy_mode": "public",
+  "interval_seconds": 3,
+  "custom_rules": {
+    "example.exe": {
+      "details": "Working on something",
+      "state": ""
+    }
+  }
+}
