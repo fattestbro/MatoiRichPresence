@@ -5,5 +5,5 @@ if errorlevel 1 exit /b 1
 call .venv\Scripts\activate.bat
 python -m pip install -U pip
 pip install -r requirements.txt pyinstaller
-pyinstaller --noconfirm --clean --windowed --name MatoiRichPresence -m matoi_rich_presence
+pyinstaller --noconfirm --clean --windowed --name MatoiRichPresence matoi_rich_presence\__main__.py
 endlocal
