@@ -1,9 +1,11 @@
 # Changelog
 
-## 5.0.0
+## Initial public baseline
 
-- Added context-aware Activity Engine.
-- Added browser context bridge and YouTube-aware activities.
-- Added Discord activity button support.
-- Added privacy modes and Windows foreground-window detection.
-- Added Windows CI and executable build script.
+- MatoiRichPresence desktop client
+- Context-aware activity engine
+- Browser and YouTube context support
+- Dynamic Discord buttons
+- Privacy controls and exclusions
+- Custom rules and backgrounds
+- Windows executable build workflow
