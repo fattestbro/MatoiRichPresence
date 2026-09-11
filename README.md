@@ -1,59 +1,48 @@
 # MatoiRichPresence
 
-A Windows Discord Rich Presence client built around context rather than a pile of hard-coded statuses.
+Windows desktop Discord Rich Presence client with context-aware activity detection, browser integration, smart status text, dynamic buttons, privacy controls and a red/black anime-inspired interface.
 
-## Current release
+## Included
 
-**5.0.0** — release candidate
-
-### Included
-
-- Foreground Windows application detection
+- Foreground application and game detection
 - Context-aware Activity Engine
-- Browser context bridge for Chromium/Firefox-based browsers
-- YouTube, GitHub, Twitch and Reddit URL awareness
-- Discord Rich Presence integration
-- Dynamic `Watch Video` button for detected YouTube URLs
-- PySide6 desktop UI
-- Private mode
-- Windows executable build script
-- Windows GitHub Actions test matrix
+- Browser context bridge
+- YouTube-aware activity with public metadata
+- Dynamic `Watch Video` and channel buttons
+- Public / Limited / Private modes
+- Per-EXE exclusions and custom rules
+- Local activity history
+- System tray controls
+- Custom background image support
+- One-file Windows build
 
-## Requirements
+## Run
 
-- Windows 10/11
-- Python 3.10+ for source execution
-- Discord desktop client for Rich Presence
-- A Discord Application ID
+For users, launch `MatoiRichPresence.exe` from the project root.
 
-## Run from source
+For source development:
 
 ```powershell
 py -3.10 -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
 python -m matoi_rich_presence
 ```
 
-Or run `build_exe.bat` on Windows to create `dist\MatoiRichPresence.exe`.
+`build_exe.bat` installs the build dependencies, runs the tests and writes `MatoiRichPresence.exe` directly to the project root. The final executable is not left in `dist`.
 
-## Browser bridge
+## Discord setup
 
-Load `browser_extension/` as an unpacked extension in Chromium/Firefox-compatible development tooling. The extension sends only the active tab URL and title to the localhost bridge used by the desktop client.
+Create a Discord application, copy its Application ID and enter it in the app settings.
+
+## Browser connector
+
+Load `browser_extension/` as an unpacked extension. It sends only the active tab URL, title, browser marker and timestamp to `127.0.0.1:28741`.
 
 ## Privacy
 
-The project is designed around public activity context. It does not require a Discord account token and does not intentionally collect passwords, clipboard contents, keystrokes or screenshots. Use Private mode when you do not want an activity published.
-
-## Development
-
-Run:
-
-```powershell
-pytest -q
-```
-
-See `CONTRIBUTING.md` and `SECURITY.md` before opening a pull request or reporting a security issue.
+The client does not need a Discord account token. It does not intentionally read keystrokes, clipboard contents, screenshots or file contents. Private mode clears the published activity.
 
 ## License
 
