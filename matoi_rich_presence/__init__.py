@@ -1,1 +1,2 @@
-__version__ = "5.0.0"
+APP_NAME = "MatoiRichPresence"
+VERSION = "0.0.0"
