@@ -2,10 +2,12 @@ name: CI
 on:
   push:
   pull_request:
+
 jobs:
   test:
     runs-on: windows-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
     steps:
@@ -14,5 +16,27 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install -U pip
-      - run: pip install -r requirements.txt pytest
-      - run: pytest -q
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pip install -e . --no-deps
+      - run: python -m pytest -q
+
+  build-windows:
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - run: python -m pip install -U pip
+      - run: python -m pip install -r requirements-dev.txt pyinstaller==6.17.0
+      - run: python -m pip install -e . --no-deps
+      - run: python -m pytest -q
+      - run: python -m PyInstaller --noconfirm --clean --distpath . --workpath .build --specpath . MatoiRichPresence.spec
+      - shell: powershell
+        run: |
+          if (!(Test-Path .\MatoiRichPresence.exe)) { throw 'MatoiRichPresence.exe was not produced' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MatoiRichPresence-windows
+          path: MatoiRichPresence.exe
